@@ -1,0 +1,82 @@
+name: Bug
+description: Report an incorrect, broken, or unsafe behaviour.
+title: "[BUG] "
+labels: ["type:bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: One-line description of the problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, reliable reproduction. Include command-lines verbatim and fixture setup.
+      value: |
+        1. …
+        2. …
+        3. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What should have happened.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: What actually happened. Include full error messages, stack traces, and relevant log excerpts.
+    validations:
+      required: true
+
+  - type: input
+    id: devsweep_version
+    attributes:
+      label: devsweep version
+      placeholder: "0.1.0 (or commit sha)"
+    validations:
+      required: true
+
+  - type: input
+    id: macos_version
+    attributes:
+      label: macOS version
+      placeholder: "14.4 (23E214) on Apple Silicon"
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Tool versions (Xcode, Homebrew, Swift), relevant config snippets, projectRoots layout, FileVault on/off if relevant.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: safety_impact
+    attributes:
+      label: Safety impact (tick if applicable)
+      options:
+        - label: Destroyed or moved data unexpectedly
+        - label: Bypassed `GlobalDenyList` or safety prompt
+        - label: Leaked sensitive paths or content to logs / archive / stderr
+        - label: Crashed during destructive operation (possible inconsistent state)
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / session manifest
+      description: Relevant excerpts from `~/.local/state/devsweep/removed.jsonl` or `sessions/*.json`. Please redact secrets before pasting.
+    validations:
+      required: false

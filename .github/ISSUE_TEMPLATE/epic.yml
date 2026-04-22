@@ -1,0 +1,68 @@
+name: Epic
+description: Container issue grouping related tasks under a single goal
+title: "[EPIC] "
+labels: ["type:epic"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why this epic exists. What problem or capability it addresses. Link to research-report / design docs.
+      placeholder: |
+        This epic covers … It is required because … Related research sections: S1–S4, P1–P3 …
+    validations:
+      required: true
+
+  - type: textarea
+    id: goals
+    attributes:
+      label: Goals
+      description: Concrete outcomes this epic must deliver (bullet list).
+      placeholder: |
+        - Deliver X
+        - Enable Y
+        - Unblock Z
+    validations:
+      required: true
+
+  - type: textarea
+    id: children
+    attributes:
+      label: Child tasks
+      description: Checklist of child issues. Leave empty if children are not yet created — add them via GitHub sub-issues UI or link them here.
+      value: |
+        - [ ] #NNN
+        - [ ] #NNN
+    validations:
+      required: false
+
+  - type: textarea
+    id: exit_criteria
+    attributes:
+      label: Exit criteria
+      description: When is this epic considered Done? Reference AC from the research-report where possible.
+      placeholder: |
+        - All child tasks closed
+        - AC-1, AC-2, AC-3 from research report passing
+        - Integration test green
+    validations:
+      required: true
+
+  - type: textarea
+    id: related_docs
+    attributes:
+      label: Related documents
+      description: Links to research-report sections, design notes, external references.
+      placeholder: |
+        - `swarm-report/mac-dev-cleaner-research.md` §Plugin API refined design
+        - `docs/architecture.md` (when added)
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Open questions, trade-offs, risks specific to this epic.
+    validations:
+      required: false

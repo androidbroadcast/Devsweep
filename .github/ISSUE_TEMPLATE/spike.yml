@@ -1,0 +1,52 @@
+name: Spike
+description: Time-boxed investigation producing a decision or prototype, not production code.
+title: "[SPIKE] "
+labels: ["type:spike"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      description: What specific question must this spike answer? One sentence.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why the question matters now. What decision is blocked until it is answered.
+    validations:
+      required: true
+
+  - type: input
+    id: timebox
+    attributes:
+      label: Timebox
+      description: Hard limit — stop when reached and document findings even if inconclusive.
+      placeholder: "4 hours / 1 day / 2 days"
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: Investigation approach
+      description: Hypotheses, benchmarks to run, reference implementations to study.
+    validations:
+      required: false
+
+  - type: textarea
+    id: exit_artifact
+    attributes:
+      label: Exit artifact
+      description: What deliverable proves the spike is done — written recommendation, benchmark numbers, proof-of-concept branch, decision recorded in `docs/adr/`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+    validations:
+      required: false

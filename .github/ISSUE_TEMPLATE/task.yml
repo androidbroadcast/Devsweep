@@ -1,0 +1,88 @@
+name: Task
+description: Concrete implementation task. Must include acceptance criteria and enough context for an agent or human to proceed without asking.
+title: "[TASK] "
+labels: ["type:task"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why this task exists and what it contributes to the parent epic. 1–3 paragraphs.
+      placeholder: |
+        This task implements … It is required because … Relates to AC-X, AC-Y from research-report.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: Checkboxed list in Given/When/Then format. Each criterion must be falsifiable (grep, diff, test assertion, or observable behaviour). Reference AC-NN IDs from the research-report when applicable.
+      value: |
+        - [ ] **AC-NN:** Given …, When …, Then …
+        - [ ] **AC-NN:** Given …, When …, Then …
+    validations:
+      required: true
+
+  - type: textarea
+    id: files_to_touch
+    attributes:
+      label: Files to touch (estimate)
+      description: Best-effort list of files/directories this task is expected to modify or create. Helps the agent pre-load context.
+      value: |
+        - `Sources/DevsweepCore/…`
+        - `Tests/DevsweepCoreTests/…`
+    validations:
+      required: false
+
+  - type: textarea
+    id: implementation_notes
+    attributes:
+      label: Implementation notes
+      description: Architectural hints, Swift-API references, links to research-report sections (S1–S14 safety, P1–P10 performance, Plugin API), and any non-obvious constraints.
+      placeholder: |
+        - Use `actor` for shared mutable state (see research §Plugin API principle 7).
+        - No `FileManager.removeItem` outside `DevsweepCorePrivate` (S1, S8).
+        - Benchmark target: <N ms on M items (P6).
+    validations:
+      required: false
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: GitHub issue links. `Blocked by #N` — must close first. `Related to #N` — parallel work.
+      value: |
+        - Blocked by #NNN
+        - Related to #NNN
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: safety_checklist
+    attributes:
+      label: Safety checklist (skip rows that do not apply)
+      description: For any task touching destructive paths or user data, tick applicable invariants.
+      options:
+        - label: Respects single destructive path — no `removeItem`/`trashItem`/`Process` outside `DevsweepCorePrivate` (S1, S8)
+        - label: `GlobalDenyList` consulted as last-line-of-defense before action (S2)
+        - label: TOCTOU re-validation via `openat O_NOFOLLOW + unlinkat` atomic (S4)
+        - label: Output sanitised through `displaySafe` (S9)
+        - label: Input validated via strict grammar (S14)
+        - label: Correct file permissions (`0600`/`0700`) + `CSBackupSetItemExcluded` where applicable (S6, S6a)
+
+  - type: checkboxes
+    id: definition_of_done
+    attributes:
+      label: Definition of Done
+      options:
+        - label: Acceptance criteria satisfied and verifiable
+          required: true
+        - label: Tests added or updated (unit / integration as appropriate)
+          required: true
+        - label: No build / lint / test regressions
+          required: true
+        - label: Self-review against the research-report invariants
+          required: true
+        - label: Code review approved
+          required: true

@@ -1,0 +1,41 @@
+name: Chore
+description: Infrastructure, tooling, housekeeping. No user-visible behaviour change.
+title: "[CHORE] "
+labels: ["type:chore"]
+body:
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What the chore addresses and why it is worth doing now.
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope of change
+      description: Files, tools, workflows affected. Keep it tight — chores must not grow.
+      placeholder: |
+        - `.github/workflows/ci.yml`
+        - `Package.swift`
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      value: |
+        - [ ] …
+        - [ ] …
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Open questions, rollback plan, side-effects.
+    validations:
+      required: false
