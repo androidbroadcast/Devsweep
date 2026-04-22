@@ -137,3 +137,20 @@ Before writing or modifying code that lives under `Sources/`:
 
 Missing this context will usually produce code that violates an S-invariant and is rejected
 by review even if it builds.
+
+## Session operating notes
+
+- `AC-NN` references in issues map to acceptance criteria in
+  `swarm-report/mac-dev-cleaner-research.md` — gitignored, local-only. If a session cannot
+  find the file and needs to resolve a specific ID, ask the user; the ID glossary is not
+  reproduced in `docs/`.
+- Direct fast-forward merges (`git merge --ff-only <branch> && git push origin main`) are
+  the norm for docs/infra work at this stage — no PR ceremony until Swift code starts
+  landing. The branch-guard hook blocks commits on `main`; always branch first
+  (`git checkout -b <feature-branch>`).
+- `gh project field-list 3 --owner androidbroadcast --format json` — fetch Size/Module
+  field and option IDs when scripting project-board updates.
+- `gh api graphql` with the `addSubIssue(issueId, subIssueId)` mutation — native
+  parent/child linkage between issues (distinct from the Project "Parent issue" field).
+- For bulk issue or project-board edits, use a short Python script calling `gh` CLI +
+  GraphQL and checkpoint state to `/tmp/*.json` so the operation is resumable.
